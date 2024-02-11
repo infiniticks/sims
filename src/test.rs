@@ -53,3 +53,23 @@ mod generic {
         super::find_first_not_of(crate::generic::find_first_not_of)
     }
 }
+
+mod sse42 {
+    #[test]
+    fn find_first_of() {
+        if is_x86_feature_detected!("sse4.2") {
+            super::find_first_of(|data, searched| unsafe {
+                crate::sse42::find_first_of(data, searched)
+            })
+        }
+    }
+
+    #[test]
+    fn find_first_not_of() {
+        if is_x86_feature_detected!("sse4.2") {
+            super::find_first_not_of(|data, searched| unsafe {
+                crate::sse42::find_first_not_of(data, searched)
+            })
+        }
+    }
+}

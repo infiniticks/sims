@@ -6,3 +6,4 @@ description = "Simplistic string search"
 authors = ["David Pépin <oss@infiniticks.io>"]
 
 [dependencies]
+smallvec = "1.13"
