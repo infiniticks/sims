@@ -1,0 +1,8 @@
+[package]
+name = "sims"
+version = "0.1.0"
+edition = "2021"
+description = "Simplistic string search"
+authors = ["David Pépin <oss@infiniticks.io>"]
+
+[dependencies]
