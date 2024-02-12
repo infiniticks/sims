@@ -1,0 +1,30 @@
+name: Check SimS codebase
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+      - name: Check code format
+        run: cargo fmt --check
+      - name: Check code
+        run: cargo check
+      - name: Code linting
+        run: cargo clippy --tests
+      - name: Build
+        run: cargo build --all-features
+      - name: Unit tests
+        run: cargo test
