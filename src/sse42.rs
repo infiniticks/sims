@@ -235,10 +235,10 @@ pub unsafe fn find_first_of(data: &[u8], searched: &[u8]) -> Option<usize> {
 
 #[target_feature(enable = "sse4.2")]
 #[inline]
-pub unsafe fn find_first_not_of(data: &[u8], searched: &[u8]) -> Option<usize> {
-    if searched.len() <= ByteSet::max_size() {
-        find_first_not_of_small(data, searched)
+pub unsafe fn find_first_not_of(data: &[u8], not_searched: &[u8]) -> Option<usize> {
+    if not_searched.len() <= ByteSet::max_size() {
+        find_first_not_of_small(data, not_searched)
     } else {
-        find_first_not_of_large(data, searched)
+        find_first_not_of_large(data, not_searched)
     }
 }
