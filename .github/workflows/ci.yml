@@ -2,11 +2,16 @@ name: Check SimS codebase
 
 on:
   push:
+    branches:
+      - '**'
   pull_request:
+  workflow_call:
   workflow_dispatch:
 
-permissions:
-  contents: read
+permissions: {}
+
+env:
+  RUSTFLAGS: -Dwarnings
 
 jobs:
   check:
@@ -23,8 +28,10 @@ jobs:
       - name: Check code
         run: cargo check
       - name: Code linting
-        run: cargo clippy --tests
+        run: cargo clippy --all-features --tests --benches
       - name: Build
         run: cargo build --all-features
       - name: Unit tests
-        run: cargo test
+        run: cargo test --all-features
+      - name: Doc
+        run: cargo doc
